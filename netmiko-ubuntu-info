@@ -1,0 +1,26 @@
+# Tested on Ubuntu 18.04 using python3 and Netmiko.
+# sudo apt-get install -y python3-netmiko
+
+from netmiko import ConnectHandler
+import time
+
+linux = {
+    'device_type': 'linux',
+    'ip': '10.1.1.20',
+    'username': 'steve',
+    'password': 'passwordhere',
+}
+
+
+net_connect = ConnectHandler(**linux)
+net_connect.find_prompt()
+output = net_connect.send_command('ifconfig')
+time.sleep(5)
+print (output)
+output = net_connect.send_command('cat /etc/os-release')
+time.sleep(5)
+print (output)
+output = net_connect.send_command('uname')
+time.sleep(5)
+print (output)
+print (">>>>>>>>> End <<<<<<<<<")
