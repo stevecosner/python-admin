@@ -1,0 +1,36 @@
+
+import getpass
+
+import telnetlib
+
+
+
+HOST = "192.168.122.144"
+
+password = getpass.getpass()
+
+
+
+tn = telnetlib.Telnet(HOST)
+
+
+
+if password:
+
+    tn.read_until(b"Password: ")
+
+    tn.write(password.encode('ascii') + b"\n")
+
+
+
+tn.write(b"enable\n")
+
+tn.write(b"admin\n")
+
+tn.write(b"terminal length 0\n")
+
+tn.write(b"vlan database\n")
+
+tn.write(b"vlan 100\n")
+
+tn.write(b"exit\n")
